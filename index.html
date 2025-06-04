@@ -1,0 +1,1277 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>Arbetsmiljöprocess - Skellefteå Kraft</title>
+  <style>
+    :root {
+      --primary-purple: #6C307D;
+      --medium-purple: #934D95;
+      --light-purple: #BF4F7B;
+      --green: #7CB342;
+      --orange: #FF6B35;
+      --teal: #4DB6AC;
+      --white: #ffffff;
+      --gray: #999;
+      --light-gray: #f5f5f5;
+      --shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: var(--light-gray);
+      margin: 0;
+      padding: 20px;
+      color: #333;
+    }
+
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 12px;
+      box-shadow: var(--shadow);
+    }
+
+    .header {
+      background: linear-gradient(135deg, var(--primary-purple), var(--medium-purple));
+      color: white;
+      padding: 2rem;
+      text-align: center;
+      border-radius: 12px 12px 0 0;
+    }
+
+    .header h1 {
+      margin: 0;
+      font-size: 2.2rem;
+      font-weight: bold;
+    }
+
+    .diagram-container {
+      padding: 3rem 2rem;
+    }
+
+    /* Process phases arrow design */
+    .process-phases {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      margin-bottom: 0;
+      height: 60px;
+      position: relative;
+      max-width: 1200px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .phase {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: bold;
+      font-size: 1.1rem;
+      cursor: pointer;
+      position: relative;
+      clip-path: polygon(0 0, calc(100% - 30px) 0, 100% 50%, calc(100% - 30px) 100%, 0 100%, 30px 50%);
+      margin-left: -25px;
+      z-index: 1;
+    }
+
+    .phase:first-child {
+      margin-left: 0;
+      clip-path: polygon(0 0, calc(100% - 30px) 0, 100% 50%, calc(100% - 30px) 100%, 0 100%);
+    }
+
+    .phase:last-child {
+      clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%, 30px 50%);
+    }
+
+    .phase.planering { background: var(--primary-purple); z-index: 4; }
+    .phase.projektering { background: var(--medium-purple); z-index: 3; }
+    .phase.utforande { background: var(--light-purple); z-index: 2; }
+    .phase.drift { background: var(--green); z-index: 1; }
+
+    /* Main workflow visualization */
+    .workflow-section {
+      background: white;
+      padding: 0 2rem 2rem 2rem;
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+      margin-bottom: 2rem;
+      max-width: 1200px;
+      margin-left: auto;
+      margin-right: auto;
+      margin-top: -5px;
+    }
+
+    /* New grid structure */
+    .workflow-grid {
+      display: grid;
+      grid-template-columns: 60px 1fr 60px 1fr 60px 1fr 60px 1fr 60px;
+      gap: 20px;
+      align-items: start;
+      margin: 2rem auto;
+      max-width: 1200px;
+    }
+
+    .ol-column {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+      padding-top: 40px;
+    }
+
+    .phase-column {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      padding: 20px;
+      border: 3px dashed #666;
+      border-radius: 12px;
+      background-color: rgba(0, 0, 0, 0.03);
+      min-height: 150px;
+    }
+
+    .phase-row {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .phase-label {
+      text-align: center;
+      font-weight: bold;
+      color: #666;
+      margin-bottom: 10px;
+    }
+
+    /* Small square boxes */
+    .role-box, .milestone {
+      width: 50px;
+      height: 50px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+      text-align: center;
+      font-size: 0.75rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: var(--shadow);
+      transition: transform 0.2s ease;
+    }
+
+    .role-box.byggherre {
+      background: var(--primary-purple);
+      color: white;
+    }
+
+    .role-box.bas-p {
+      background: var(--orange);
+      color: white;
+    }
+
+    .role-box.bas-u {
+      background: var(--teal);
+      color: white;
+    }
+
+    .milestone {
+      background: var(--gray);
+      color: white;
+    }
+
+    /* Legend */
+    .legend {
+      display: flex;
+      justify-content: space-around;
+      margin-top: 2rem;
+      padding: 1rem;
+      background: var(--light-gray);
+      border-radius: 8px;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .legend-box {
+      width: 40px;
+      height: 30px;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 0.8rem;
+      color: white;
+    }
+
+    .legend-box.byggherre { background: var(--primary-purple); }
+    .legend-box.bas-p { background: var(--orange); }
+    .legend-box.bas-u { background: var(--teal); }
+
+    .legend-text {
+      font-size: 0.9rem;
+    }
+
+    /* Meeting Structure Section styles */
+    .meeting-section {
+      background: white;
+      padding: 2rem;
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+
+    .meeting-section h2 {
+      color: var(--primary-purple);
+      margin-bottom: 1rem;
+    }
+
+    .meeting-description {
+      color: #666;
+      font-size: 1.05rem;
+      line-height: 1.6;
+      max-width: 800px;
+      margin: 0 auto 1.5rem;
+    }
+
+    .meeting-button {
+      background: var(--primary-purple);
+      color: white;
+      border: none;
+      padding: 12px 30px;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: bold;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      transition: all 0.3s ease;
+      box-shadow: var(--shadow);
+    }
+
+    .meeting-button:hover {
+      background: var(--medium-purple);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+
+    .meeting-button svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    /* HUKI Section styles */
+    .huki-section {
+      background: white;
+      padding: 2rem;
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+
+    .huki-section h2 {
+      color: var(--primary-purple);
+      margin-bottom: 1rem;
+    }
+
+    .huki-description {
+      color: #666;
+      font-size: 1.05rem;
+      line-height: 1.6;
+      max-width: 800px;
+      margin: 0 auto 1.5rem;
+    }
+
+    .huki-legend {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .huki-item {
+      background: var(--light-gray);
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-size: 1rem;
+    }
+
+    .huki-button {
+      background: var(--primary-purple);
+      color: white;
+      border: none;
+      padding: 12px 30px;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: bold;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      transition: all 0.3s ease;
+      box-shadow: var(--shadow);
+    }
+
+    .huki-button:hover {
+      background: var(--medium-purple);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+
+    .huki-button svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    /* Organization structure styles */
+    .organization-section {
+      background: white;
+      padding: 2rem;
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+      margin-bottom: 2rem;
+      margin-top: 2rem;
+    }
+
+    .organization-section h2 {
+      color: var(--primary-purple);
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+
+    .section-intro {
+      text-align: center;
+      color: #666;
+      margin-bottom: 2rem;
+      font-size: 1.1rem;
+    }
+
+    .org-structure {
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+      margin: 2rem auto;
+      max-width: 1000px;
+    }
+
+    .org-level-1, .org-level-2, .org-level-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 30px;
+      justify-items: center;
+    }
+
+    .org-level-1 {
+      grid-template-columns: 1fr;
+    }
+
+    .org-box {
+      padding: 20px;
+      border-radius: 12px;
+      text-align: center;
+      width: 280px;
+      min-height: 120px;
+      box-shadow: var(--shadow);
+      transition: transform 0.2s ease;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .org-box:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+
+    .org-box.juridisk {
+      background: linear-gradient(135deg, #4A6B88, #5B7FA3);
+      color: white;
+    }
+
+    .org-box.juridisk.main {
+      background: linear-gradient(135deg, var(--primary-purple), var(--medium-purple));
+      width: 320px;
+    }
+
+    .org-box.fysisk {
+      background: linear-gradient(135deg, #5B7FA3, #7A9AB8);
+      color: white;
+    }
+
+    .org-box h3 {
+      margin: 0 0 5px 0;
+      font-size: 1.2rem;
+    }
+
+    .org-type {
+      font-size: 0.9rem;
+      opacity: 0.9;
+      font-style: italic;
+    }
+
+    .org-note {
+      font-size: 0.85rem;
+      margin-top: 10px;
+      opacity: 0.9;
+    }
+
+    .org-responsibility {
+      font-size: 0.85rem;
+      margin-top: 10px;
+      padding-top: 10px;
+      border-top: 1px solid rgba(255,255,255,0.3);
+    }
+
+    .org-legend {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      margin-top: 2rem;
+      padding: 1rem;
+      background: var(--light-gray);
+      border-radius: 8px;
+    }
+
+    .legend-color {
+      width: 30px;
+      height: 20px;
+      border-radius: 6px;
+      display: inline-block;
+      margin-right: 8px;
+    }
+
+    .legend-color.juridisk {
+      background: linear-gradient(135deg, #4A6B88, #5B7FA3);
+    }
+
+    .legend-color.fysisk {
+      background: linear-gradient(135deg, #5B7FA3, #7A9AB8);
+    }
+
+    /* Competence Requirements Section styles */
+    .competence-section {
+      background: white;
+      padding: 2rem;
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+
+    .competence-section h2 {
+      color: var(--primary-purple);
+      margin-bottom: 1rem;
+    }
+
+    .competence-description {
+      color: #666;
+      font-size: 1.05rem;
+      line-height: 1.6;
+      max-width: 800px;
+      margin: 0 auto 1.5rem;
+    }
+
+    .competence-button {
+      background: var(--primary-purple);
+      color: white;
+      border: none;
+      padding: 12px 30px;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: bold;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      transition: all 0.3s ease;
+      box-shadow: var(--shadow);
+    }
+
+    .competence-button:hover {
+      background: var(--medium-purple);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+
+    .competence-button svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    /* Info panel styles - Side panel */
+    .info-panel-overlay {
+      position: fixed;
+      top: 0;
+      right: -400px;
+      width: 400px;
+      height: 100vh;
+      background: white;
+      box-shadow: -2px 0 10px rgba(0,0,0,0.1);
+      transition: right 0.3s ease;
+      z-index: 1000;
+      overflow-y: auto;
+    }
+
+    .info-panel-overlay.active {
+      right: 0;
+    }
+
+    .info-panel-close {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      width: 30px;
+      height: 30px;
+      background: var(--light-gray);
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      color: #666;
+      transition: all 0.2s ease;
+    }
+
+    .info-panel-close:hover {
+      background: #e0e0e0;
+      transform: rotate(90deg);
+    }
+
+    .info-panel-content {
+      padding: 60px 30px 30px;
+    }
+
+    .info-panel {
+      display: none;
+    }
+
+    .info-panel.active {
+      display: block;
+      animation: fadeIn 0.3s ease-in;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .info-panel h3 {
+      margin-top: 0;
+      color: var(--primary-purple);
+      font-size: 1.5rem;
+      padding-bottom: 10px;
+      border-bottom: 2px solid var(--primary-purple);
+    }
+
+    .info-panel h4 {
+      color: var(--medium-purple);
+      margin-top: 1.5rem;
+    }
+
+    .info-panel ul {
+      padding-left: 1.2rem;
+    }
+
+    .info-panel li {
+      margin-bottom: 0.5rem;
+    }
+
+    /* Backdrop for mobile */
+    .info-panel-backdrop {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.3);
+      z-index: 999;
+    }
+
+    .info-panel-backdrop.active {
+      display: block;
+    }
+
+    /* Highlight active element */
+    .role-box.info-active,
+    .milestone.info-active,
+    .phase.info-active {
+      box-shadow: 0 0 0 3px var(--primary-purple);
+      transform: scale(1.05);
+    }
+
+    /* Responsive design */
+    @media (max-width: 968px) {
+      .org-level-2, .org-level-3 {
+        grid-template-columns: 1fr;
+      }
+      
+      .org-box {
+        width: 100%;
+        max-width: 320px;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .workflow-grid {
+        grid-template-columns: auto 1fr auto;
+        gap: 10px;
+      }
+      
+      .role-box, .milestone {
+        width: 35px;
+        height: 35px;
+        font-size: 0.65rem;
+      }
+      
+      .legend {
+        flex-direction: column;
+        gap: 1rem;
+      }
+      
+      .phase {
+        font-size: 0.9rem;
+      }
+      
+      .workflow-section {
+        padding: 1rem;
+      }
+      
+      .info-panel-overlay {
+        width: 100%;
+        right: -100%;
+      }
+      
+      .info-panel-overlay.active {
+        right: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>Process för arbetsmiljöansvar i byggnads- och anläggningsprojekt</h1>
+    </div>
+
+    <div class="diagram-container">
+      <!-- Process phases -->
+      <div class="process-phases">
+        <div class="phase planering" onclick="showPhaseInfo('planering')">Planering</div>
+        <div class="phase projektering" onclick="showPhaseInfo('projektering')">Projektering</div>
+        <div class="phase utforande" onclick="showPhaseInfo('utforande')">Utförande</div>
+        <div class="phase drift" onclick="showPhaseInfo('drift')">D&U</div>
+      </div>
+
+      <div class="workflow-section">
+        <!-- New workflow grid structure -->
+        <div class="workflow-grid">
+          <!-- Start with ÖL, then alternate between phase and ÖL -->
+          <div class="ol-column">
+            <div class="milestone" onclick="showRoleInfo('ol-start')">ÖL</div>
+          </div>
+          
+          <!-- Planeringsfas aligned with phase above -->
+          <div class="phase-column">
+            <div class="phase-label">Planering</div>
+            <div class="phase-row">
+              <div class="role-box byggherre" onclick="showRoleInfo('byggherre')">BH</div>
+              <div class="role-box bas-p" onclick="showRoleInfo('bas-p')">Bas P</div>
+            </div>
+          </div>
+          
+          <div class="ol-column">
+            <div class="milestone" onclick="showRoleInfo('ol-plan-proj')">ÖL</div>
+          </div>
+          
+          <!-- Projekteringsfas aligned with phase above -->
+          <div class="phase-column">
+            <div class="phase-label">Projektering</div>
+            <div class="phase-row">
+              <div class="role-box byggherre" onclick="showRoleInfo('byggherre')">BH</div>
+              <div class="role-box bas-p" onclick="showRoleInfo('bas-p')">Bas P</div>
+            </div>
+          </div>
+          
+          <div class="ol-column">
+            <div class="milestone" onclick="showRoleInfo('ol-proj-utf')">ÖL</div>
+          </div>
+          
+          <!-- Utförandefas aligned with phase above -->
+          <div class="phase-column">
+            <div class="phase-label">Utförande</div>
+            <div class="phase-row">
+              <div class="role-box bas-p" onclick="showRoleInfo('bas-p')">Bas P</div>
+              <div class="role-box bas-u" onclick="showRoleInfo('bas-u')">Bas U</div>
+            </div>
+            <div class="phase-row">
+              <div class="role-box byggherre" onclick="showRoleInfo('byggherre')">BH</div>
+            </div>
+          </div>
+          
+          <div class="ol-column">
+            <div class="milestone" onclick="showRoleInfo('ol-utf-drift')">ÖL</div>
+          </div>
+          
+          <!-- D&U-fas aligned with phase above -->
+          <div class="phase-column">
+            <div class="phase-label">Drift & Underhåll</div>
+            <div class="phase-row">
+              <div class="role-box bas-p" onclick="showRoleInfo('bas-p')">Bas P</div>
+              <div class="role-box bas-u" onclick="showRoleInfo('bas-u')">Bas U</div>
+            </div>
+            <div class="phase-row">
+              <div class="role-box byggherre" onclick="showRoleInfo('byggherre')">BH</div>
+            </div>
+          </div>
+          
+          <div class="ol-column">
+            <div class="milestone" onclick="showRoleInfo('ol-end')">ÖL</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Legend moved here -->
+      <div class="legend">
+        <div class="legend-item">
+          <div class="legend-box byggherre">BH</div>
+          <div class="legend-text">
+            <strong>Byggherre:</strong><br>
+            Ansvar, kontroll och tillsyn<br>
+            Organisation<br>
+            Policy, arbetsmiljömål, struktur och rutiner
+          </div>
+        </div>
+        <div class="legend-item">
+          <div class="legend-box bas-p">Bas P</div>
+          <div class="legend-text">
+            <strong>Bas P:</strong><br>
+            Roll och ansvar<br>
+            Arbetssätt och rutiner
+          </div>
+        </div>
+        <div class="legend-item">
+          <div class="legend-box bas-u">Bas U</div>
+          <div class="legend-text">
+            <strong>Bas U:</strong><br>
+            Roll och ansvar<br>
+            Arbetssätt och rutiner
+          </div>
+        </div>
+        <div class="legend-item">
+          <div class="milestone" style="padding: 8px 12px;">ÖL</div>
+          <div class="legend-text">
+            <strong>Överlämning av arbetsmiljöinformation inför nästa steg/skede</strong><br>
+            Krav, kontroll, uppföljning mellan byggherre och ansvarig Bas
+          </div>
+        </div>
+      </div>
+
+      <!-- Meeting Structure Section -->
+      <div class="meeting-section">
+        <h2>Mötesstruktur</h2>
+        <p class="meeting-description">
+          En strukturerad mötesplan säkerställer god kommunikation och uppföljning av arbetsmiljöarbetet genom hela projektet.
+        </p>
+        <button class="meeting-button" onclick="window.open('pdf/Motesstruktur.pdf', '_blank')">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+            <polyline points="14 2 14 8 20 8"/>
+            <line x1="16" y1="13" x2="8" y2="13"/>
+            <line x1="16" y1="17" x2="8" y2="17"/>
+            <polyline points="10 9 9 9 8 9"/>
+          </svg>
+          Öppna mötesstruktur (PDF)
+        </button>
+      </div>
+
+      <!-- HUKI Section -->
+      <div class="huki-section">
+        <h2>HUKI - Ansvarsfördelning</h2>
+        <p class="huki-description">
+          HUKI är en metod för att tydliggöra ansvar och roller för olika arbetsuppgifter inom byggnads- och anläggningsarbete. 
+          Genom att visualisera vem som har huvudansvaret, vem som utför arbetet och vilka som bör konsulteras och informeras 
+          minskar risken för missförstånd och det skapas en tydlig ansvarsfördelning.
+        </p>
+        <div class="huki-legend">
+          <div class="huki-item"><strong>H</strong> = Huvudansvar</div>
+          <div class="huki-item"><strong>U</strong> = Utförare</div>
+          <div class="huki-item"><strong>K</strong> = Konsulteras</div>
+          <div class="huki-item"><strong>I</strong> = Informeras</div>
+        </div>
+        <button class="huki-button" onclick="window.open('pdf/HUKI.pdf', '_blank')">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+            <polyline points="14 2 14 8 20 8"/>
+            <line x1="16" y1="13" x2="8" y2="13"/>
+            <line x1="16" y1="17" x2="8" y2="17"/>
+            <polyline points="10 9 9 9 8 9"/>
+          </svg>
+          Öppna detaljerad HUKI-plan (PDF)
+        </button>
+      </div>
+
+      <!-- Organization structure section -->
+      <div class="organization-section">
+        <h2>Organisation och ansvarsfördelning</h2>
+        <p class="section-intro">För att förstå processen är det viktigt att skilja mellan juridiska personer (organisationer) och fysiska personer (individer) samt deras respektive ansvar.</p>
+        
+        <div class="org-structure">
+          <!-- Skellefteå Kraft överst -->
+          <div class="org-level-1">
+            <div class="org-box juridisk main">
+              <h3>Skellefteå Kraft</h3>
+              <span class="org-type">(juridisk person)</span>
+            </div>
+          </div>
+          
+          <!-- Juridiska roller -->
+          <div class="org-level-2">
+            <div class="org-box juridisk">
+              <h3>Byggherre</h3>
+              <span class="org-type">(juridisk person)</span>
+              <p class="org-note">Vanligtvis Skellefteå Kraft</p>
+            </div>
+            <div class="org-box juridisk">
+              <h3>Bas-P</h3>
+              <span class="org-type">(juridisk person)</span>
+              <p class="org-note">Vanligtvis Skellefteå Kraft eller annat företag</p>
+            </div>
+            <div class="org-box juridisk">
+              <h3>Bas-U</h3>
+              <span class="org-type">(juridisk person)</span>
+              <p class="org-note">Vanligtvis Skellefteå Kraft eller annat företag</p>
+            </div>
+          </div>
+          
+          <!-- Fysiska personer -->
+          <div class="org-level-3">
+            <div class="org-box fysisk" onclick="window.open('pdf/Byggherrens_stallforetradare.pdf', '_blank')" style="cursor: pointer;">
+              <h3>Byggherrens ställföreträdare</h3>
+              <span class="org-type">(person)</span>
+              <p class="org-responsibility">Ansvarar för att byggherrens uppgifter utförs</p>
+            </div>
+            <div class="org-box fysisk" onclick="window.open('pdf/Handlaggare_Bas-P.pdf', '_blank')" style="cursor: pointer;">
+              <h3>Handläggare Bas-P</h3>
+              <span class="org-type">(person)</span>
+              <p class="org-responsibility">Ansvarar för att Bas-P uppgifter utförs</p>
+            </div>
+            <div class="org-box fysisk" onclick="window.open('pdf/Handlaggare_Bas-U.pdf', '_blank')" style="cursor: pointer;">
+              <h3>Handläggare Bas-U</h3>
+              <span class="org-type">(person)</span>
+              <p class="org-responsibility">Ansvarar för att Bas-U uppgifter utförs</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="org-legend">
+          <div class="legend-item">
+            <div class="legend-color juridisk"></div>
+            <span>Juridisk person (organisation)</span>
+          </div>
+          <div class="legend-item">
+            <div class="legend-color fysisk"></div>
+            <span>Fysisk person (individ)</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Competence Requirements Section -->
+      <div class="competence-section">
+        <h2>Kompetenskrav</h2>
+        <p class="competence-description">
+          Tydliga kompetenskrav säkerställer att rätt person utför rätt uppgift. Här finns en kompetensmatris som visar vilken erfarenhet, 
+          utbildning och kunskap som krävs för respektive roll.
+        </p>
+        <button class="competence-button" onclick="window.open('pdf/Kompetenskrav.pdf', '_blank')">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+            <polyline points="14 2 14 8 20 8"/>
+            <line x1="16" y1="13" x2="8" y2="13"/>
+            <line x1="16" y1="17" x2="8" y2="17"/>
+            <polyline points="10 9 9 9 8 9"/>
+          </svg>
+          Öppna kompetensmatris (PDF)
+        </button>
+      </div>
+
+      <!-- Info panels in side panel -->
+      <div class="info-panel-backdrop" onclick="closeInfoPanel()"></div>
+      <div class="info-panel-overlay">
+        <button class="info-panel-close" onclick="closeInfoPanel()">×</button>
+        <div class="info-panel-content">
+          
+          <!-- ========== REDIGERA INNEHÅLL HÄR NEDAN ========== -->
+          
+          <!-- PLANERINGSFASEN -->
+          <div id="info-planering" class="info-panel">
+            <h3>Planeringsstadiet</h3>
+            
+            <h4>Vad ska göras:</h4>
+            <ul>
+              <li>Definiera projektets omfattning och komplexitet</li>
+              <li>Upprätta realistisk och genomförbar tidplan</li>
+              <li>Identifiera övergripande arbetsmiljörisker</li>
+              <li>Tillsätta Bas-P och Bas-U</li>
+              <li>Avsätta resurser för arbetsmiljöarbetet</li>
+              <li>Förbereda underlag för förhandsanmälan</li>
+            </ul>
+            
+            <h4>Vem gör det:</h4>
+            <ul>
+              <li><strong>Byggherren/Byggherrens kontaktperson:</strong> Ansvarar för alla ovanstående punkter</li>
+            </ul>
+          </div>
+
+          <!-- PROJEKTERINGSFASEN -->
+          <div id="info-projektering" class="info-panel">
+            <h3>Projekteringsstadiet</h3>
+            
+            <h4>Vad ska göras:</h4>
+            <ul>
+              <li>Identifiera och eliminera arbetsmiljörisker i projekteringen</li>
+              <li>Upprätta arbetsmiljöplan (AMP)</li>
+              <li>Samordna arbetsmiljökrav mellan projektörer</li>
+              <li>Planera för säkra arbetsmetoder i utförandet</li>
+              <li>Beakta drift, underhåll och framtida arbeten</li>
+              <li>Säkerställa kompetens för tillfälliga konstruktioner</li>
+            </ul>
+            
+            <h4>Vem gör det:</h4>
+            <ul>
+              <li><strong>Bas-P handläggaren:</strong> Utför samordning, upprättar AMP, identifierar risker</li>
+              <li><strong>Projektörer (arkitekter, konstruktörer, etc.):</strong> Integrerar arbetsmiljökrav i sina handlingar</li>
+              <li><strong>Byggherrens kontaktperson:</strong> Följer upp att arbetet utförs, kontrollerar kompetens</li>
+            </ul>
+          </div>
+
+          <!-- UTFÖRANDEFASEN -->
+          <div id="info-utforande" class="info-panel">
+            <h3>Utförandestadiet</h3>
+            
+            <h4>Vad ska göras:</h4>
+            <ul>
+              <li>Ta emot och anpassa AMP från projekteringen</li>
+              <li>Genomföra arbetsmiljöintroduktioner</li>
+              <li>Samordna arbetsmiljö mellan entreprenörer</li>
+              <li>Leda skyddsronder och arbetsmiljömöten</li>
+              <li>Kontrollera tekniska anordningar</li>
+              <li>Dokumentera och åtgärda avvikelser</li>
+              <li>Stoppa arbete vid fara</li>
+            </ul>
+            
+            <h4>Vem gör det:</h4>
+            <ul>
+              <li><strong>Bas-U handläggaren:</strong> Leder samordningen, genomför möten, uppdaterar AMP</li>
+              <li><strong>Entreprenörer:</strong> Följer AMP, deltar i samordning, ansvarar för egen personal</li>
+              <li><strong>Byggherrens kontaktperson:</strong> Följer upp arbetet, säkerställer att Bas-U har förutsättningar</li>
+              <li><strong>Skyddsombud:</strong> Deltar i skyddsronder, rapporterar risker</li>
+            </ul>
+          </div>
+
+          <!-- DRIFT OCH UNDERHÅLL -->
+          <div id="info-drift" class="info-panel">
+            <h3>Driftstadiet</h3>
+            
+            <h4>Vad ska göras:</h4>
+            <ul>
+              <li>Sammanställa arbetsmiljödokumentation från projektet</li>
+              <li>Dokumentera för framtida:
+                <ul>
+                  <li>Underhållsarbeten</li>
+                  <li>Ombyggnationer</li>
+                  <li>Tekniska installationer</li>
+                  <li>Rivning</li>
+                </ul>
+              </li>
+              <li>Överlämna dokumentation till förvaltning</li>
+            </ul>
+            
+            <h4>Vem gör det:</h4>
+            <ul>
+              <li><strong>Byggherrens kontaktperson:</strong> Säkerställer att dokumentation upprättas</li>
+              <li><strong>Bas-P och Bas-U:</strong> Bidrar med underlag från sina respektive skeden</li>
+              <li><strong>Projektörer och entreprenörer:</strong> Levererar teknisk dokumentation</li>
+              <li><strong>Förvaltningsorganisation:</strong> Tar emot och förvaltar dokumentationen</li>
+            </ul>
+          </div>
+
+          <!-- BYGGHERRE (BH) -->
+          <div id="info-byggherre" class="info-panel">
+            <h3>Byggherre (BH)</h3>
+            
+            <h4>Byggherren (juridisk person)</h4>
+            <ul>
+              <li><strong>Vad:</strong> En organisation, företag eller myndighet som beställer byggprojektet</li>
+              <li><strong>Juridiskt ansvar:</strong> Har det övergripande arbetsmiljöansvaret enligt AFS 2023:3</li>
+              <li><strong>Kan inte:</strong> Som juridisk person kan byggherren inte fysiskt utföra uppgifter - därför behövs personer som agerar</li>
+            </ul>
+            
+            <h4>Byggherrens kontaktperson (fysisk person)</h4>
+            <ul>
+              <li><strong>Vad:</strong> En anställd eller utsedd person inom byggherrens egen organisation</li>
+              <li><strong>Roll:</strong> Agerar på byggherrens uppdrag och säkerställer att byggherren uppfyller sitt arbetsmiljöansvar</li>
+              <li><strong>Praktiskt ansvar:</strong> Utför det dagliga arbetet som byggherren juridiskt ansvarar för</li>
+            </ul>
+            
+            <p><strong>Kontaktpersonens konkreta uppgifter:</strong></p>
+            <ul>
+              <li><strong>Tillsätter</strong> Bas-P och Bas-U med rätt kompetens</li>
+              <li><strong>Säkerställer</strong> realistisk tidplan och följer upp denna löpande</li>
+              <li><strong>Kontrollerar</strong> att anlitade aktörer har rätt kompetens</li>
+              <li><strong>Lämnar in</strong> förhandsanmälan till Arbetsmiljöverket</li>
+              <li><strong>Följer upp</strong> arbetsmiljöarbetet genom hela projektet</li>
+              <li><strong>Deltar</strong> fysiskt i möten och avstämningar</li>
+            </ul>
+            
+            <h4>Byggherrens representant (oftast juridisk person)</h4>
+            <ul>
+              <li><strong>Vad:</strong> Ett externt företag som byggherren anlitar</li>
+              <li><strong>Roll:</strong> Representerar byggherren i projektet men är inte del av byggherrens organisation</li>
+              <li><strong>Exempel:</strong> Byggföretag, projektledningsföretag eller byggkonsult</li>
+            </ul>
+          </div>
+
+          <!-- BAS-P HANDLÄGGARE -->
+          <div id="info-bas-p" class="info-panel">
+            <h3>Bas-P</h3>
+            
+            <h4>Bas-P (juridisk person)</h4>
+            <ul>
+              <li><strong>Vad:</strong> Det egna företaget eller ett företag/organisation som byggherren utser för byggarbetsmiljösamordning i projekteringsskedet</li>
+              <li><strong>Juridiskt ansvar:</strong> Ansvarar enligt AFS 2023:3 för att arbetsmiljöfrågorna beaktas under projekteringen</li>
+              <li><strong>I praktiken:</strong> Oftast byggherrens egen organisation, men kan vid större projekt vara externt konsultföretag</li>
+            </ul>
+            
+            <h4>Bas-P handläggaren (fysisk person)</h4>
+            <ul>
+              <li><strong>Vad:</strong> Den faktiska personen som utför Bas-P-uppdraget, anställd hos Bas-P-organisationen</li>
+              <li><strong>Roll:</strong> Utför det praktiska arbetet som Bas-P juridiskt ansvarar för</li>
+              <li><strong>Kompetens:</strong> Måste ha relevant utbildning och erfarenhet för uppdraget</li>
+            </ul>
+            
+            <p><strong>Bas-P handläggarens konkreta uppgifter:</strong></p>
+            
+            <p><strong>Huvudansvar:</strong></p>
+            <ul>
+              <li>Identifiera och eliminera arbetsmiljörisker redan i projekteringsfasen</li>
+              <li>Upprätta och underhålla arbetsmiljöplan (AMP) anpassad till projektet</li>
+              <li>Säkerställa att arbetsmiljökrav integreras i projekteringen</li>
+            </ul>
+            
+            <p><strong>Praktiska arbetsuppgifter:</strong></p>
+            <ul>
+              <li><strong>Analyserar</strong> projektet för att hitta potentiella risker</li>
+              <li><strong>Samordnar</strong> arbetsmiljöfrågor mellan olika projektörer</li>
+              <li><strong>Kontrollerar</strong> tidsplanering för arbetsmoment (samtidiga/efterföljande)</li>
+              <li><strong>Säkerställer</strong> särskild kompetens för tillfälliga/samverkande konstruktioner</li>
+              <li><strong>Dokumenterar</strong> riskhantering som del av byggprocessen</li>
+              <li><strong>Deltar</strong> i överlämningsmöte med Bas-U</li>
+              <li><strong>Informerar</strong> byggherren om projektörer inte följer anvisningar eller om allvarliga risker</li>
+            </ul>
+          </div>
+
+          <!-- BAS-U HANDLÄGGARE -->
+          <div id="info-bas-u" class="info-panel">
+            <h3>Bas-U</h3>
+            
+            <h4>Bas-U (juridisk person)</h4>
+            <ul>
+              <li><strong>Vad:</strong> Det egna företaget eller ett företag/organisation som byggherren utser för byggarbetsmiljösamordning i utförandeskedet</li>
+              <li><strong>Juridiskt ansvar:</strong> Ansvarar enligt AFS 2023:3 för arbetsmiljösamordningen under byggskedet</li>
+              <li><strong>I praktiken:</strong> Kan vara byggherrens egen organisation, totalentreprenören eller ett externt konsultföretag</li>
+            </ul>
+            
+            <h4>Bas-U handläggaren (fysisk person)</h4>
+            <ul>
+              <li><strong>Vad:</strong> Den faktiska personen som utför Bas-U-uppdraget, anställd hos Bas-U-organisationen</li>
+              <li><strong>Roll:</strong> Utför det praktiska arbetet som Bas-U juridiskt ansvarar för under byggskedet</li>
+              <li><strong>Kompetens:</strong> Måste ha relevant utbildning och erfarenhet för byggarbetsmiljösamordning</li>
+            </ul>
+            
+            <p><strong>Bas-U handläggarens konkreta uppgifter:</strong></p>
+            
+            <p><strong>Huvudansvar:</strong></p>
+            <ul>
+              <li><strong>Säkerställa</strong> att AMP är uppdaterad och tillämpas på arbetsplatsen</li>
+              <li><strong>Kontrollera</strong> att tekniska anordningar är besiktigade och godkända</li>
+              <li><strong>Samordna</strong> arbetsmiljöarbetet mellan olika entreprenörer och aktörer</li>
+              <li><strong>Avbryta</strong> arbete vid omedelbar eller allvarlig fara för liv och hälsa</li>
+            </ul>
+            
+            <p><strong>Praktiska arbetsuppgifter:</strong></p>
+            <ul>
+              <li><strong>Leder</strong> byggmöten med arbetsmiljöfokus</li>
+              <li><strong>Organiserar</strong> skyddsverksamhet på byggarbetsplatsen</li>
+              <li><strong>Genomför</strong> arbetsmiljömöten och skyddsronder regelbundet</li>
+              <li><strong>Säkerställer</strong> att alla får arbetsmiljöintroduktion innan arbete påbörjas</li>
+              <li><strong>Ger klartecken</strong> till entreprenörer att påbörja sitt arbete</li>
+              <li><strong>Följer upp</strong> entreprenörernas arbetsmiljöarbete</li>
+              <li><strong>Kontrollerar</strong> att alla har rätt kompetens, utbildning och tillstånd</li>
+              <li><strong>Dokumenterar</strong> och hanterar arbetsmiljöavvikelser</li>
+              <li><strong>Informerar</strong> byggherren om entreprenörer inte följer Bas-U:s anvisningar</li>
+              <li><strong>Uppdaterar</strong> arbetsmiljöplanen vid behov</li>
+              <li><strong>Samordnar</strong> och säkerställer att säkerhetsrutiner följs av alla parter</li>
+            </ul>
+          </div>
+
+          <!-- ÖVERLÄMNING (ÖL) - Nu med separata sektioner -->
+          <!-- ÖL FÖRE PLANERING -->
+          <div id="info-ol-start" class="info-panel">
+            <h3>Överlämning före planering</h3>
+            <h4>Från idé till projekt</h4>
+            <p>Överlämning från beställare/verksamhet till projektorganisation.</p>
+            <ul>
+              <li>Projektidé och syfte</li>
+              <li>Ekonomiska ramar</li>
+              <li>Tidsmässiga förutsättningar</li>
+              <li>Verksamhetskrav</li>
+              <li>Befintliga risker i verksamheten</li>
+            </ul>
+          </div>
+
+          <!-- ÖL PLANERING TILL PROJEKTERING -->
+          <div id="info-ol-plan-proj" class="info-panel">
+            <h3>Överlämning från planering till projektering</h3>
+            <h4>Från byggherre till Bas-P</h4>
+            <p>Formell överlämning av projektförutsättningar och krav.</p>
+            <ul>
+              <li>Projektets omfattning och komplexitet</li>
+              <li>Tidplan och milstolpar</li>
+              <li>Identifierade övergripande risker</li>
+              <li>Förhandsanmälan till Arbetsmiljöverket</li>
+              <li>Budget för arbetsmiljöåtgärder</li>
+              <li>Kontaktuppgifter till alla parter</li>
+            </ul>
+          </div>
+
+          <!-- ÖL PROJEKTERING TILL UTFÖRANDE -->
+          <div id="info-ol-proj-utf" class="info-panel">
+            <h3>Överlämning från projektering till utförande</h3>
+            <h4>Från Bas-P till Bas-U</h4>
+            <p>Överlämning av arbetsmiljöplan och projekteringsunderlag.</p>
+            <ul>
+              <li>Komplett arbetsmiljöplan (AMP)</li>
+              <li>Identifierade risker och åtgärder</li>
+              <li>Krav på tillfälliga konstruktioner</li>
+              <li>Samordningsbehov mellan entreprenörer</li>
+              <li>Kritiska arbetsmoment</li>
+              <li>Dokumentation från projekteringsmöten</li>
+            </ul>
+          </div>
+
+          <!-- ÖL UTFÖRANDE TILL DRIFT -->
+          <div id="info-ol-utf-drift" class="info-panel">
+            <h3>Överlämning från utförande till drift</h3>
+            <h4>Från projektorganisation till förvaltning</h4>
+            <p>Överlämning av färdig anläggning med dokumentation.</p>
+            <ul>
+              <li>Relationshandlingar</li>
+              <li>Drift- och underhållsinstruktioner</li>
+              <li>Arbetsmiljörisker vid underhåll</li>
+              <li>Besiktningsprotokoll</li>
+              <li>Garantihandlingar</li>
+              <li>Utbildning av driftpersonal</li>
+            </ul>
+          </div>
+
+          <!-- ÖL EFTER DRIFT -->
+          <div id="info-ol-end" class="info-panel">
+            <h3>Överlämning efter drift</h3>
+            <h4>Dokumentation för framtiden</h4>
+            <p>Säkerställa information för framtida arbeten.</p>
+            <ul>
+              <li>Arkivering av projektdokumentation</li>
+              <li>Erfarenhetsåterföring till organisation</li>
+              <li>Underlag för framtida ombyggnation</li>
+              <li>Information för eventuell rivning</li>
+              <li>Lärdomar för kommande projekt</li>
+            </ul>
+          </div>
+          
+          <!-- ========== SLUT PÅ REDIGERBART INNEHÅLL ========== -->
+          
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function showPhaseInfo(phase) {
+      openInfoPanel();
+      document.querySelectorAll('.info-panel').forEach(p => p.classList.remove('active'));
+      document.getElementById('info-' + phase)?.classList.add('active');
+      
+      // Highlight active element
+      document.querySelectorAll('.phase, .role-box, .milestone').forEach(el => el.classList.remove('info-active'));
+      event.target.classList.add('info-active');
+    }
+
+    function showRoleInfo(role) {
+      openInfoPanel();
+      document.querySelectorAll('.info-panel').forEach(p => p.classList.remove('active'));
+      document.getElementById('info-' + role)?.classList.add('active');
+      
+      // Highlight active element
+      document.querySelectorAll('.phase, .role-box, .milestone').forEach(el => el.classList.remove('info-active'));
+      event.target.classList.add('info-active');
+    }
+
+    function openInfoPanel() {
+      document.querySelector('.info-panel-overlay').classList.add('active');
+      document.querySelector('.info-panel-backdrop').classList.add('active');
+    }
+
+    function closeInfoPanel() {
+      document.querySelector('.info-panel-overlay').classList.remove('active');
+      document.querySelector('.info-panel-backdrop').classList.remove('active');
+      document.querySelectorAll('.phase, .role-box, .milestone').forEach(el => el.classList.remove('info-active'));
+    }
+
+    // Close info panel when clicking outside
+    window.onclick = (e) => {
+      if (!e.target.matches('.phase, .role-box, .milestone, .info-panel-overlay, .info-panel-content, .info-panel-content *')) {
+        closeInfoPanel();
+      }
+    };
+
+    // Close with Escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closeInfoPanel();
+      }
+    });
+
+    // Add hover effects
+    document.querySelectorAll('.role-box, .milestone, .phase').forEach(element => {
+      element.addEventListener('mouseenter', function() {
+        if (!this.classList.contains('info-active')) {
+          this.style.transform = 'scale(1.05)';
+          this.style.transition = 'transform 0.2s ease';
+        }
+      });
+      
+      element.addEventListener('mouseleave', function() {
+        if (!this.classList.contains('info-active')) {
+          this.style.transform = 'scale(1)';
+        }
+      });
+    });
+  </script>
+</body>
+</html>
