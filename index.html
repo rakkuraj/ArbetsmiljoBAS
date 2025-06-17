@@ -591,6 +591,33 @@
       margin-bottom: 0.5rem;
     }
 
+    .info-panel-button {
+      background: var(--primary-purple);
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 6px;
+      font-size: 0.9rem;
+      font-weight: bold;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.3s ease;
+      margin-top: 1rem;
+    }
+
+    .info-panel-button:hover {
+      background: var(--medium-purple);
+      transform: translateY(-2px);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    }
+
+    .info-panel-button svg {
+      width: 16px;
+      height: 16px;
+    }
+
     /* Backdrop for mobile */
     .info-panel-backdrop {
       display: none;
@@ -1131,62 +1158,240 @@
           </div>
 
           <!-- ÖVERLÄMNING (ÖL) - Nu med separata sektioner -->
-          <!-- ÖL FÖRE PLANERING -->
+          <!-- STARTMÖTE (FÖRSTA ÖL) -->
           <div id="info-ol-start" class="info-panel">
-            <h3>Överlämning före planering</h3>
-            <h4>Från idé till projekt</h4>
-            <p>Överlämning från beställare/verksamhet till projektorganisation.</p>
+            <h3>Startmöte</h3>
+            <h4>Överlämning från beställare/verksamhet till projektorganisation</h4>
+            
+            <p><strong>Deltagare:</strong></p>
             <ul>
-              <li>Projektidé och syfte</li>
-              <li>Ekonomiska ramar</li>
-              <li>Tidsmässiga förutsättningar</li>
-              <li>Verksamhetskrav</li>
-              <li>Befintliga risker i verksamheten</li>
+              <li>Projektbeställare (beslutsfattare)</li>
+              <li>Projektledare (om annan än byggherren)</li>
             </ul>
+            
+            <p><strong>Syftet med mötet är:</strong></p>
+            <ul>
+              <li>Att fastställa roller och ansvar enligt gällande lagkrav</li>
+              <li>Att klargöra rutiner för kommunikation och samordning</li>
+              <li>Att identifiera nödvändig kompetens och erfarenhet hos inblandade aktörer</li>
+            </ul>
+            
+            <p><strong>Beslut som fattas:</strong></p>
+            <ul>
+              <li>Vem som ska vara byggherrens kontaktperson</li>
+              <li>Bedömning om extern Bas-P behövs eller om det hanteras internt</li>
+              <li>Identifiera behov av förhandsanmälan till Arbetsmiljöverket</li>
+            </ul>
+            
+            <p><strong>Minimiagenda:</strong></p>
+            
+            <p><strong>Projektöversikt</strong></p>
+            <ul>
+              <li>Omfattning, mål och tidplan</li>
+            </ul>
+            
+            <p><strong>Formellt fastställa roller och ansvar</strong></p>
+            <ul>
+              <li>Byggherrens kontaktpersons arbetsuppgifter</li>
+              <li>Beslut av juridisk Bas-P under byggarbetets faser</li>
+              <li>Planera juridisk Bas-U</li>
+            </ul>
+            
+            <p><strong>Identifiera eventuellt behov om förhandsanmälan till Arbetsmiljöverket</strong></p>
+            
+            <p><strong>Planering av kommande överlämningar och uppföljning</strong></p>
+            <ul>
+              <li>Hur och när ska överföringen ske mellan faserna</li>
+            </ul>
+            
+            <button class="info-panel-button" onclick="window.open('pdf/Startmote.pdf', '_blank')">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                <polyline points="14 2 14 8 20 8"/>
+                <line x1="16" y1="13" x2="8" y2="13"/>
+                <line x1="16" y1="17" x2="8" y2="17"/>
+                <polyline points="10 9 9 9 8 9"/>
+              </svg>
+              Förslag till agenda för startmöte (PDF)
+            </button>
           </div>
 
           <!-- ÖL PLANERING TILL PROJEKTERING -->
           <div id="info-ol-plan-proj" class="info-panel">
             <h3>Överlämning från planering till projektering</h3>
-            <h4>Från byggherre till Bas-P</h4>
-            <p>Formell överlämning av projektförutsättningar och krav.</p>
+            <h4>Överlämning av Bas-P uppdraget</h4>
+            
+            <p><strong>Deltagare:</strong></p>
             <ul>
-              <li>Projektets omfattning och komplexitet</li>
-              <li>Tidplan och milstolpar</li>
-              <li>Identifierade övergripande risker</li>
-              <li>Förhandsanmälan till Arbetsmiljöverket</li>
-              <li>Budget för arbetsmiljöåtgärder</li>
-              <li>Kontaktuppgifter till alla parter</li>
+              <li>Byggherrens kontaktperson (sammankallande)</li>
+              <li>Handläggare Bas-P (mottagare av uppdraget)</li>
+              <li>Projektledare (om annan än byggherren)</li>
+              <li>Eventuellt: Representant från Bas-P organisation (om extern)</li>
+            </ul>
+            
+            <p><strong>Syftet med mötet är:</strong></p>
+            <ul>
+              <li>Att formellt överlämna Bas-P uppdraget</li>
+              <li>Att säkerställa att Bas-P förstår projektets omfattning</li>
+              <li>Att etablera arbetssätt för arbetsmiljöplanen (AMP)</li>
+            </ul>
+            
+            <p><strong>Minimiagenda:</strong></p>
+            
+            <p><strong>Projektgenomgång</strong></p>
+            <ul>
+              <li>Projektets omfattning, mål och tidplan</li>
+              <li>Identifierade risker från planeringsfasen</li>
+              <li>Särskilda utmaningar eller förutsättningar</li>
+            </ul>
+            
+            <p><strong>Formellt uppdrag till Bas-P</strong></p>
+            <ul>
+              <li>Bekräfta vem som är juridisk Bas-P (egen organisation eller extern)</li>
+              <li>Genomgång av uppdragets omfattning</li>
+              <li>Ansvar och befogenheter enligt AFS 2023:3</li>
+              <li>Ersättning och resurser (om extern Bas-P)</li>
+            </ul>
+            
+            <p><strong>Arbetsmiljöplan (AMP)</strong></p>
+            <ul>
+              <li>Krav på innehåll och struktur</li>
+              <li>Tidplan för upprättande</li>
+              <li>Mall eller riktlinjer att utgå från</li>
+            </ul>
+            
+            <p><strong>Samordning och kommunikation</strong></p>
+            <ul>
+              <li>Kontaktvägar mellan byggherre och Bas-P</li>
+              <li>Rutiner för rapportering och uppföljning</li>
+              <li>Samordning med kommande projektörer</li>
+            </ul>
+            
+            <p><strong>Dokumentation och nästa steg</strong></p>
+            <ul>
+              <li>Vilken dokumentation som ska överlämnas</li>
+              <li>Planering för överlämning till Bas-U</li>
             </ul>
           </div>
 
           <!-- ÖL PROJEKTERING TILL UTFÖRANDE -->
           <div id="info-ol-proj-utf" class="info-panel">
             <h3>Överlämning från projektering till utförande</h3>
-            <h4>Från Bas-P till Bas-U</h4>
-            <p>Överlämning av arbetsmiljöplan och projekteringsunderlag.</p>
+            <h4>Överlämning av AMP och Bas-U uppdraget</h4>
+            
+            <p><strong>Deltagare:</strong></p>
             <ul>
-              <li>Komplett arbetsmiljöplan (AMP)</li>
-              <li>Identifierade risker och åtgärder</li>
+              <li>Byggherrens kontaktperson (sammankallande)</li>
+              <li>Handläggare Bas-P (överlämnar AMP)</li>
+              <li>Handläggare Bas-U (mottagare)</li>
+              <li>Projektledare (om annan än byggherren)</li>
+              <li>Eventuellt: Representant från Bas-U organisation (om extern)</li>
+              <li>Eventuellt: Huvudentreprenör/projektchef</li>
+            </ul>
+            
+            <p><strong>Syftet med mötet är:</strong></p>
+            <ul>
+              <li>Att formellt överlämna arbetsmiljöplanen (AMP) från Bas-P till Bas-U</li>
+              <li>Att säkerställa att Bas-U förstår alla identifierade risker och planerade åtgärder</li>
+              <li>Att etablera rutiner för AMP-hantering under utförandefasen</li>
+            </ul>
+            
+            <p><strong>Minimiagenda:</strong></p>
+            
+            <p><strong>Genomgång av projektstatus</strong></p>
+            <ul>
+              <li>Eventuella förändringar sedan projekteringen startade</li>
+              <li>Aktuell tidplan för utförandet</li>
+            </ul>
+            
+            <p><strong>Genomgång av arbetsmiljöplanen (AMP)</strong></p>
+            <ul>
+              <li>Detaljerad genomgång av alla identifierade risker</li>
+              <li>Planerade skyddsåtgärder och arbetsmetoder</li>
+              <li>Särskilt kritiska moment</li>
               <li>Krav på tillfälliga konstruktioner</li>
-              <li>Samordningsbehov mellan entreprenörer</li>
-              <li>Kritiska arbetsmoment</li>
-              <li>Dokumentation från projekteringsmöten</li>
+            </ul>
+            
+            <p><strong>Formellt uppdrag till Bas-U</strong></p>
+            <ul>
+              <li>Bekräfta vem som är juridisk Bas-U</li>
+              <li>Ansvar och befogenheter enligt AFS 2023:3</li>
+              <li>Resurser och mandat</li>
+            </ul>
+            
+            <p><strong>Praktisk samordning</strong></p>
+            <ul>
+              <li>Rutiner för arbetsmiljömöten och skyddsronder</li>
+              <li>Hantering av underentreprenörer</li>
+              <li>Uppdatering och revidering av AMP</li>
+              <li>Avvikelserapportering</li>
+            </ul>
+            
+            <p><strong>Dokumentation</strong></p>
+            <ul>
+              <li>Överlämning av all relevant projekteringsdokumentation</li>
+              <li>Kontaktlistor och kommunikationsvägar</li>
             </ul>
           </div>
 
           <!-- ÖL UTFÖRANDE TILL DRIFT -->
           <div id="info-ol-utf-drift" class="info-panel">
-            <h3>Överlämning från utförande till drift</h3>
-            <h4>Från projektorganisation till förvaltning</h4>
-            <p>Överlämning av färdig anläggning med dokumentation.</p>
+            <h3>Överlämning från utförande till drift & underhåll</h3>
+            <h4>Överlämning från projekt till förvaltning</h4>
+            
+            <p><strong>Deltagare:</strong></p>
             <ul>
-              <li>Relationshandlingar</li>
+              <li>Byggherrens kontaktperson (sammankallande)</li>
+              <li>Handläggare Bas-U (överlämnar projektdokumentation)</li>
+              <li>Handläggare Bas-P (bidrar med projekteringsdokumentation)</li>
+              <li>Förvaltningsansvarig/Driftchef (mottagare)</li>
+              <li>Projektledare</li>
+              <li>Eventuellt: Drifttekniker som ska sköta anläggningen</li>
+            </ul>
+            
+            <p><strong>Syftet med mötet är:</strong></p>
+            <ul>
+              <li>Att säkerställa att all arbetsmiljödokumentation överlämnas till förvaltningen</li>
+              <li>Att informera om arbetsmiljörisker vid drift och underhåll</li>
+              <li>Att överlämna erfarenheter från byggprocessen</li>
+            </ul>
+            
+            <p><strong>Minimiagenda:</strong></p>
+            
+            <p><strong>Projektsammanfattning</strong></p>
+            <ul>
+              <li>Genomförda arbeten och eventuella avvikelser</li>
+              <li>Erfarenheter från byggprocessen</li>
+            </ul>
+            
+            <p><strong>Arbetsmiljödokumentation för drift</strong></p>
+            <ul>
+              <li>Risker vid drift och underhållsarbeten</li>
+              <li>Säkerhetsrutiner för olika arbetsmoment</li>
+              <li>Tillträdesvägar och säkerhetsutrustning</li>
+              <li>Särskilda risker (el, kemikalier, fallrisker etc.)</li>
+            </ul>
+            
+            <p><strong>Teknisk dokumentation</strong></p>
+            <ul>
               <li>Drift- och underhållsinstruktioner</li>
-              <li>Arbetsmiljörisker vid underhåll</li>
+              <li>Relationshandlingar</li>
               <li>Besiktningsprotokoll</li>
               <li>Garantihandlingar</li>
-              <li>Utbildning av driftpersonal</li>
+            </ul>
+            
+            <p><strong>Utbildning och introduktion</strong></p>
+            <ul>
+              <li>Genomgång av anläggningen</li>
+              <li>Praktisk visning av kritiska punkter</li>
+              <li>Utbildningsbehov för driftpersonal</li>
+            </ul>
+            
+            <p><strong>Framtida arbetsmiljöarbete</strong></p>
+            <ul>
+              <li>Rutiner för periodiska kontroller</li>
+              <li>Dokumentation för framtida ombyggnader</li>
+              <li>Arkivering av projektdokumentation</li>
             </ul>
           </div>
 
