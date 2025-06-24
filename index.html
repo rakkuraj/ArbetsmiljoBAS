@@ -710,65 +710,65 @@
         <div class="workflow-grid">
           <!-- Start with ÖL, then alternate between phase and ÖL -->
           <div class="ol-column">
-            <div class="milestone" onclick="showRoleInfo('ol-start')">ÖL</div>
+            <div class="milestone" onclick="showRoleInfo('ol-start')" title="ÖL1: Startmöte - Överlämning från beställare till projekt">ÖL1</div>
           </div>
           
           <!-- Planeringsfas aligned with phase above -->
           <div class="phase-column">
             <div class="phase-label">Planering</div>
             <div class="phase-row">
-              <div class="role-box byggherre" onclick="showRoleInfo('byggherre')">BH</div>
-              <div class="role-box bas-p" onclick="showRoleInfo('bas-p')">Bas P</div>
+              <div class="role-box byggherre" onclick="showRoleInfo('byggherre')" title="Byggherre - Har det övergripande arbetsmiljöansvaret och tillsätter Bas-P och Bas-U">BH</div>
+              <div class="role-box bas-p" onclick="showRoleInfo('bas-p')" title="Bas-P - Byggarbetsmiljösamordnare för projektering, ansvarar för arbetsmiljö i projekteringsfasen">Bas P</div>
             </div>
           </div>
           
           <div class="ol-column">
-            <div class="milestone" onclick="showRoleInfo('ol-plan-proj')">ÖL</div>
+            <div class="milestone" onclick="showRoleInfo('ol-plan-proj')" title="ÖL2: Överlämning från planering till projektering">ÖL2</div>
           </div>
           
           <!-- Projekteringsfas aligned with phase above -->
           <div class="phase-column">
             <div class="phase-label">Projektering</div>
             <div class="phase-row">
-              <div class="role-box byggherre" onclick="showRoleInfo('byggherre')">BH</div>
-              <div class="role-box bas-p" onclick="showRoleInfo('bas-p')">Bas P</div>
+              <div class="role-box byggherre" onclick="showRoleInfo('byggherre')" title="Byggherre - Har det övergripande arbetsmiljöansvaret och tillsätter Bas-P och Bas-U">BH</div>
+              <div class="role-box bas-p" onclick="showRoleInfo('bas-p')" title="Bas-P - Byggarbetsmiljösamordnare för projektering, ansvarar för arbetsmiljö i projekteringsfasen">Bas P</div>
             </div>
           </div>
           
           <div class="ol-column">
-            <div class="milestone" onclick="showRoleInfo('ol-proj-utf')">ÖL</div>
+            <div class="milestone" onclick="showRoleInfo('ol-proj-utf')" title="ÖL3: Överlämning från projektering till utförande">ÖL3</div>
           </div>
           
           <!-- Utförandefas aligned with phase above -->
           <div class="phase-column">
             <div class="phase-label">Utförande</div>
             <div class="phase-row">
-              <div class="role-box bas-p" onclick="showRoleInfo('bas-p')">Bas P</div>
-              <div class="role-box bas-u" onclick="showRoleInfo('bas-u')">Bas U</div>
+              <div class="role-box bas-p" onclick="showRoleInfo('bas-p')" title="Bas-P - Byggarbetsmiljösamordnare för projektering, ansvarar för arbetsmiljö i projekteringsfasen">Bas P</div>
+              <div class="role-box bas-u" onclick="showRoleInfo('bas-u')" title="Bas-U - Byggarbetsmiljösamordnare för utförande, ansvarar för arbetsmiljö på byggarbetsplatsen">Bas U</div>
             </div>
             <div class="phase-row">
-              <div class="role-box byggherre" onclick="showRoleInfo('byggherre')">BH</div>
+              <div class="role-box byggherre" onclick="showRoleInfo('byggherre')" title="Byggherre - Har det övergripande arbetsmiljöansvaret och tillsätter Bas-P och Bas-U">BH</div>
             </div>
           </div>
           
           <div class="ol-column">
-            <div class="milestone" onclick="showRoleInfo('ol-utf-drift')">ÖL</div>
+            <div class="milestone" onclick="showRoleInfo('ol-utf-drift')" title="ÖL4: Överlämning från utförande till drift & underhåll">ÖL4</div>
           </div>
           
           <!-- D&U-fas aligned with phase above -->
           <div class="phase-column">
             <div class="phase-label">Drift & Underhåll</div>
             <div class="phase-row">
-              <div class="role-box bas-p" onclick="showRoleInfo('bas-p')">Bas P</div>
-              <div class="role-box bas-u" onclick="showRoleInfo('bas-u')">Bas U</div>
+              <div class="role-box bas-p" onclick="showRoleInfo('bas-p')" title="Bas-P - Byggarbetsmiljösamordnare för projektering, ansvarar för arbetsmiljö i projekteringsfasen">Bas P</div>
+              <div class="role-box bas-u" onclick="showRoleInfo('bas-u')" title="Bas-U - Byggarbetsmiljösamordnare för utförande, ansvarar för arbetsmiljö på byggarbetsplatsen">Bas U</div>
             </div>
             <div class="phase-row">
-              <div class="role-box byggherre" onclick="showRoleInfo('byggherre')">BH</div>
+              <div class="role-box byggherre" onclick="showRoleInfo('byggherre')" title="Byggherre - Har det övergripande arbetsmiljöansvaret och tillsätter Bas-P och Bas-U">BH</div>
             </div>
           </div>
           
           <div class="ol-column">
-            <div class="milestone" onclick="showRoleInfo('ol-end')">ÖL</div>
+            <div class="milestone" onclick="showRoleInfo('ol-end')" title="ÖL5: Slutöverlämning - Dokumentation för framtiden">ÖL5</div>
           </div>
         </div>
       </div>
@@ -811,9 +811,9 @@
 
       <!-- Meeting Structure Section -->
       <div class="meeting-section">
-        <h2>Mötesstruktur</h2>
+        <h2>Mötesstruktur och agendaförslag</h2>
         <p class="meeting-description">
-          En strukturerad mötesplan säkerställer god kommunikation och uppföljning av arbetsmiljöarbetet genom hela projektet.
+          En strukturerad plan för möten och överlämningar säkerställer god kommunikation, tydlighet och uppföljning av arbetsmiljöarbetet genom hela projektet – från planering till drift och underhåll.
         </p>
         <button class="meeting-button" onclick="window.open('pdf/Motesstruktur.pdf', '_blank')">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -823,7 +823,7 @@
             <line x1="16" y1="17" x2="8" y2="17"/>
             <polyline points="10 9 9 9 8 9"/>
           </svg>
-          Öppna mötesstruktur (PDF)
+          Öppna mall för mötesagendor (PDF)
         </button>
       </div>
 
@@ -1206,7 +1206,8 @@
               <li>Hur och när ska överföringen ske mellan faserna</li>
             </ul>
             
-            <button class="info-panel-button" onclick="window.open('pdf/Startmote.pdf', '_blank')">
+            <p style="margin-top: 2rem;"><strong>Se även övergripande mötesstruktur och mallar</strong></p>
+            <button class="info-panel-button" onclick="window.open('pdf/Motesstruktur.pdf', '_blank')">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
                 <polyline points="14 2 14 8 20 8"/>
@@ -1214,7 +1215,7 @@
                 <line x1="16" y1="17" x2="8" y2="17"/>
                 <polyline points="10 9 9 9 8 9"/>
               </svg>
-              Förslag till agenda för startmöte (PDF)
+              Öppna mall för mötesagendor (PDF)
             </button>
           </div>
 
@@ -1281,6 +1282,18 @@
               <li>Vilken dokumentation som ska överlämnas</li>
               <li>Planering för överlämning till Bas-U</li>
             </ul>
+            
+            <p style="margin-top: 2rem;"><strong>Se även övergripande mötesstruktur och mallar</strong></p>
+            <button class="info-panel-button" onclick="window.open('pdf/Motesstruktur.pdf', '_blank')">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                <polyline points="14 2 14 8 20 8"/>
+                <line x1="16" y1="13" x2="8" y2="13"/>
+                <line x1="16" y1="17" x2="8" y2="17"/>
+                <polyline points="10 9 9 9 8 9"/>
+              </svg>
+              Öppna mall för mötesagendor (PDF)
+            </button>
           </div>
 
           <!-- ÖL PROJEKTERING TILL UTFÖRANDE -->
@@ -1348,6 +1361,18 @@
               <li>Överlämning av all relevant projekteringsdokumentation</li>
               <li>Kontaktlistor och kommunikationsvägar</li>
             </ul>
+            
+            <p style="margin-top: 2rem;"><strong>Se även övergripande mötesstruktur och mallar</strong></p>
+            <button class="info-panel-button" onclick="window.open('pdf/Motesstruktur.pdf', '_blank')">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                <polyline points="14 2 14 8 20 8"/>
+                <line x1="16" y1="13" x2="8" y2="13"/>
+                <line x1="16" y1="17" x2="8" y2="17"/>
+                <polyline points="10 9 9 9 8 9"/>
+              </svg>
+              Öppna mall för mötesagendor (PDF)
+            </button>
           </div>
 
           <!-- ÖL UTFÖRANDE TILL DRIFT -->
@@ -1415,6 +1440,18 @@
               <li>Dokumentation för framtida ombyggnader</li>
               <li>Arkivering av projektdokumentation</li>
             </ul>
+            
+            <p style="margin-top: 2rem;"><strong>Se även övergripande mötesstruktur och mallar</strong></p>
+            <button class="info-panel-button" onclick="window.open('pdf/Motesstruktur.pdf', '_blank')">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                <polyline points="14 2 14 8 20 8"/>
+                <line x1="16" y1="13" x2="8" y2="13"/>
+                <line x1="16" y1="17" x2="8" y2="17"/>
+                <polyline points="10 9 9 9 8 9"/>
+              </svg>
+              Öppna mall för mötesagendor (PDF)
+            </button>
           </div>
 
           <!-- ÖL EFTER DRIFT -->
@@ -1429,6 +1466,18 @@
               <li>Information för eventuell rivning</li>
               <li>Lärdomar för kommande projekt</li>
             </ul>
+            
+            <p style="margin-top: 2rem;"><strong>Se även övergripande mötesstruktur och mallar</strong></p>
+            <button class="info-panel-button" onclick="window.open('pdf/Motesstruktur.pdf', '_blank')">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                <polyline points="14 2 14 8 20 8"/>
+                <line x1="16" y1="13" x2="8" y2="13"/>
+                <line x1="16" y1="17" x2="8" y2="17"/>
+                <polyline points="10 9 9 9 8 9"/>
+              </svg>
+              Öppna mall för mötesagendor (PDF)
+            </button>
           </div>
           
           <!-- ========== SLUT PÅ REDIGERBART INNEHÅLL ========== -->
