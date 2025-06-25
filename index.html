@@ -221,6 +221,56 @@
       font-size: 0.9rem;
     }
 
+    /* AFS Section styles */
+    .afs-section {
+      background: white;
+      padding: 2rem;
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+
+    .afs-section h2 {
+      color: var(--primary-purple);
+      margin-bottom: 1rem;
+    }
+
+    .afs-description {
+      color: #666;
+      font-size: 1.05rem;
+      line-height: 1.6;
+      max-width: 800px;
+      margin: 0 auto 1.5rem;
+    }
+
+    .afs-button {
+      background: var(--primary-purple);
+      color: white;
+      border: none;
+      padding: 12px 30px;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: bold;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      transition: all 0.3s ease;
+      box-shadow: var(--shadow);
+    }
+
+    .afs-button:hover {
+      background: var(--medium-purple);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+
+    .afs-button svg {
+      width: 20px;
+      height: 20px;
+    }
+
     /* Meeting Structure Section styles */
     .meeting-section {
       background: white;
@@ -697,6 +747,23 @@
     </div>
 
     <div class="diagram-container">
+      <!-- AFS 2023:3 Section -->
+      <div class="afs-section">
+        <h2>Efterlevnad av AFS 2023:3</h2>
+        <p class="afs-description">
+          Denna process säkerställer att Skellefteå Kraft uppfyller kraven i Arbetsmiljöverkets föreskrifter om byggarbetsmiljösamordning (AFS 2023:3). 
+          Processen definierar roller, ansvar och arbetssätt för att skapa en säker arbetsmiljö genom hela byggprocessen.
+        </p>
+        <button class="afs-button" onclick="window.open('https://www.av.se/arbetsmiljoarbete-och-inspektioner/publikationer/foreskrifter/afs-20233/', '_blank')">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+            <polyline points="15 3 21 3 21 9"/>
+            <line x1="10" y1="14" x2="21" y2="3"/>
+          </svg>
+          Läs AFS 2023:3 på Arbetsmiljöverkets webbplats
+        </button>
+      </div>
+
       <!-- Process phases -->
       <div class="process-phases">
         <div class="phase planering" onclick="showPhaseInfo('planering')">Planering</div>
